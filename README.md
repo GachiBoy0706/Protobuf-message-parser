@@ -1,3 +1,3 @@
-# 102-cpp-protobuf-template
+# 1787-protobuf
 
-Шаблонный репозиторий задания "Разбор потока length-prefixed Protobuf сообщений на C++" (LEARNING_CENTER-102)
+Шаблонный репозиторий для задания "Разбор потока length-prefixed Protobuf сообщений"

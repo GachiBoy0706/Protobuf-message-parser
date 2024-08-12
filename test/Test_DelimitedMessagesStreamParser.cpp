@@ -1,9 +1,9 @@
-#include <protobuf_parser/DelimitedMessagesStreamParser.hpp>
-#include <protobuf_parser/helpers.hpp>
-#include <protobuf/message.pb.h>
+#include <DelimitedMessagesStreamParser.hpp>
+#include <helpers.hpp>
+#include <message.pb.h>
 
 #include <gtest/gtest.h>
-
+#include <list>
 TEST(Parser, OneFastRequest)
 {
   std::list<typename DelimitedMessagesStreamParser<TestTask::Messages::WrapperMessage>::PointerToConstValue> messages;
