@@ -27,7 +27,7 @@ public:
         size_t bytesConsumed = 0;
         std::list<PointerToConstValue> messages;
         
-        
+        PointerToConstValue new_message;
 
         do {
                 
@@ -35,22 +35,17 @@ public:
 
                 try
                 {
-                    messages.push_back(parseDelimited<MessageType>(static_cast<const void*>(m_buffer.data()), m_buffer.size(), &bytesConsumed));  
+                    new_message = parseDelimited<MessageType>(m_buffer.data(), m_buffer.size(), &bytesConsumed);
                 }
                 catch(const std::runtime_error& e)
                 {
                     throw e;
                 }
-                catch(const std::exception& e)
-                {
-                    std::cout << e.what() << std::endl;
-                    bytesConsumed = 0;
-                }
+
+                if (new_message)
+                    messages.push_back(new_message);
                 
         } while (bytesConsumed); //пока получается расшифровывать
-
-
-        messages.pop_back();
 
         return messages;
     }

@@ -75,10 +75,10 @@ std::shared_ptr<Message> parseDelimited(const void* data, size_t size, size_t* b
     
     // Чтение префикса длины 
     uint32_t message_size;
-    
+
     if (!input_stream.ReadVarint32(&message_size)) {
-        std::cout << "reading message size" << std::endl;
-        throw std::runtime_error("Failed to read message size.");
+        *bytesConsumed = 0;
+        return nullptr;
     }
 
 
@@ -88,11 +88,6 @@ std::shared_ptr<Message> parseDelimited(const void* data, size_t size, size_t* b
     {
         *bytesConsumed = 0;
         return nullptr;
-    }
-
-    if (message_size > static_cast<uint32_t>(size-prefix_size)) // в буфере нецелое сообщение
-    {
-        message_size = size-prefix_size;
     }
     
     std::shared_ptr<Message> deserialized_message = std::make_shared<Message>();
