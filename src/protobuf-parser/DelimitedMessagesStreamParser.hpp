@@ -30,9 +30,6 @@ public:
         PointerToConstValue new_message;
 
         do {
-                
-                m_buffer.erase(m_buffer.begin(), m_buffer.begin() + bytesConsumed); //затираем расшифрованное сообщение (длина + само сообщение)
-
                 try
                 {
                     new_message = parseDelimited<MessageType>(m_buffer.data(), m_buffer.size(), &bytesConsumed);
@@ -44,6 +41,8 @@ public:
 
                 if (new_message)
                     messages.push_back(new_message);
+
+                m_buffer.erase(m_buffer.begin(), m_buffer.begin() + bytesConsumed); //затираем расшифрованное сообщение (длина + само сообщение)
                 
         } while (bytesConsumed); //пока получается расшифровывать
 
